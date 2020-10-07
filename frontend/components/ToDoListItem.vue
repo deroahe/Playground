@@ -3,7 +3,7 @@
     <span>{{ todo.title }}</span>
     <div class="controls">
       <span @click="deleteItem">🗑</span>
-      <span @click="completeItem">✓</span>
+      <span @click="todo.completed ? uncompleteItem() : completeItem()">✓</span>
     </div>
   </div>
 </template>
@@ -28,6 +28,11 @@ export default {
     deleteItem () {
       this.$services.todo.deleteItem(this.todo.id).then(() => {
         this.$emit('delete', this.todo)
+      })
+    },
+    uncompleteItem () {
+      this.$services.todo.uncomplete(this.todo).then((data) => {
+        this.todo.completed = false
       })
     }
   }

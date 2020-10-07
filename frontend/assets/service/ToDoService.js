@@ -48,6 +48,21 @@ export default class ToDoApi {
     })
   }
 
+  uncomplete (todo) {
+    return this.axios({
+      method: 'put',
+      url: 'todo/' + todo.id,
+      data: {
+        id: todo.id,
+        title: todo.title,
+        completed: false
+      },
+      withCredentials: true
+    }).then((response) => {
+      return response.data
+    })
+  }
+
   deleteItem (id) {
     return this.axios({
       method: 'delete',
